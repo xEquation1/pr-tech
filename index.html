@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PR Tech & Electronics | TV & Laptop Repairs in Johannesburg</title>
+<meta name="description" content="PR Tech & Electronics fixes TVs and laptops across all of Johannesburg. Honest pricing from R200, fast turnaround. Message us on WhatsApp for a quote.">
+
+<!-- Fonts: condensed industrial display, humanist body, monospace utility -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Design tokens ---------- */
+  :root {
+    --ink: #1A1D29;
+    --paper: #F2EFE9;
+    --amber: #E8542C;
+    --teal: #2E7D6B;
+    --grey: #6E6A64;
+    --white: #FFFFFF;
+    --card-border: rgba(26, 29, 41, 0.12);
+
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --radius: 6px;
+    --max-w: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    font-weight: 700;
+  }
+
+  p { margin: 0; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 14px 26px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:focus-visible {
+    outline: 3px solid var(--teal);
+    outline-offset: 2px;
+  }
+
+  .btn-primary {
+    background: var(--amber);
+    color: var(--white);
+    box-shadow: 0 4px 0 #b53f1e;
+  }
+  .btn-primary:hover { box-shadow: 0 6px 0 #b53f1e; }
+
+  .btn-ghost {
+    background: transparent;
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--white); }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(242, 239, 233, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--card-border);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .logo span { color: var(--amber); }
+  nav.links { display: flex; gap: 28px; }
+  nav.links a {
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ink);
+    position: relative;
+  }
+  nav.links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 0%; height: 2px;
+    background: var(--amber);
+    transition: width 0.2s ease;
+  }
+  nav.links a:hover::after { width: 100%; }
+
+  .nav-cta { display: flex; gap: 12px; align-items: center; }
+  .nav-cta .btn { padding: 10px 18px; font-size: 0.88rem; }
+
+  .mobile-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 72px 0 88px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 5vw, 4.1rem);
+    margin: 14px 0 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--amber);
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--grey);
+    max-width: 46ch;
+    margin-bottom: 30px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 26px; }
+
+  .hero-trust {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--grey);
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .hero-trust strong { color: var(--ink); }
+
+  .hero-media {
+    position: relative;
+  }
+  .hero-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: var(--radius);
+    background: linear-gradient(145deg, #2a2e3d, #14161f);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+  .hero-img::before {
+    content: "PLACEHOLDER — workbench / TV repair photo";
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
+    padding: 20px;
+  }
+  .hero-img::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 70% 30%, rgba(232,84,44,0.35), transparent 55%),
+      radial-gradient(circle at 20% 80%, rgba(46,125,107,0.25), transparent 50%);
+  }
+
+  /* Service ticket — signature element, floats on hero image */
+  .ticket {
+    position: absolute;
+    bottom: -28px;
+    left: -28px;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    width: 230px;
+    box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+    border: 1px solid var(--card-border);
+    font-family: var(--font-mono);
+  }
+  .ticket::before {
+    content: "";
+    position: absolute;
+    top: -8px; left: 16px; right: 16px;
+    height: 8px;
+    background: repeating-linear-gradient(90deg, var(--paper) 0 6px, transparent 6px 12px);
+  }
+  .ticket-row { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--grey); margin-bottom: 6px; }
+  .ticket-row b { color: var(--ink); }
+  .ticket-price { font-family: var(--font-display); font-size: 1.9rem; color: var(--amber); font-weight: 800; line-height: 1; margin: 6px 0 2px; }
+  .ticket-price small { font-family: var(--font-mono); font-size: 0.75rem; color: var(--grey); font-weight: 400; }
+
+  /* ---------- Section base ---------- */
+  section { padding: 88px 0; }
+  .section-head { max-width: 60ch; margin-bottom: 48px; }
+  .section-head h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); margin-top: 10px; }
+  .section-head p { color: var(--grey); margin-top: 14px; font-size: 1.02rem; }
+
+  .dark { background: var(--ink); color: var(--paper); }
+  .dark .grey { color: #B9B5AC; }
+  .dark .eyebrow { color: var(--amber); }
+
+  /* ---------- Services ---------- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .service-card {
+    background: var(--white);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 32px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px rgba(26,29,41,0.1); }
+  .service-num {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--amber);
+    margin-bottom: 14px;
+    display: block;
+  }
+  .service-card h3 { font-size: 1.7rem; margin-bottom: 12px; }
+  .service-card p { color: var(--grey); margin-bottom: 18px; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    border: 1px solid var(--card-border);
+    border-radius: 100px;
+    padding: 5px 12px;
+    color: var(--ink);
+  }
+
+  /* ---------- How it works ---------- */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    counter-reset: step;
+  }
+  .step { position: relative; padding-top: 8px; }
+  .step-index {
+    font-family: var(--font-display);
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: var(--amber);
+    opacity: 0.85;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .step h3 { font-size: 1.3rem; margin-bottom: 10px; text-transform: none; }
+  .step p { color: var(--grey); font-size: 0.96rem; }
+
+  /* ---------- Pricing & Estimates (ticket section) ---------- */
+  .pricing-wrap {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .big-ticket {
+    background: var(--white);
+    color: var(--ink);
+    border-radius: 10px;
+    padding: 36px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+  .big-ticket::before {
+    content: "";
+    position: absolute;
+    top: -1px; left: 24px; right: 24px;
+    height: 10px;
+    background: repeating-linear-gradient(90deg, var(--ink) 0 7px, transparent 7px 14px);
+  }
+  .big-ticket-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    font-family: var(--font-mono); font-size: 0.78rem; color: var(--grey);
+    margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px dashed var(--card-border);
+  }
+  .big-ticket-head b { color: var(--ink); display: block; font-size: 0.9rem; }
+  .big-ticket-price { font-family: var(--font-display); font-size: 3.4rem; font-weight: 800; color: var(--amber); line-height: 1; }
+  .big-ticket-price span { font-family: var(--font-mono); font-size: 1rem; color: var(--grey); font-weight: 400; }
+  .ticket-list { list-style: none; padding: 0; margin: 22px 0 0; font-family: var(--font-mono); font-size: 0.85rem; }
+  .ticket-list li { display: flex; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--card-border); color: var(--grey); }
+  .ticket-list li:last-child { border-bottom: none; }
+  .ticket-list li::before { content: "›"; color: var(--teal); font-weight: 700; }
+
+  .pricing-copy h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); margin-bottom: 16px; }
+  .pricing-copy p { color: #B9B5AC; margin-bottom: 16px; max-width: 50ch; }
+
+  /* ---------- Coverage ---------- */
+  .coverage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .area-list { columns: 2; column-gap: 28px; font-family: var(--font-mono); font-size: 0.9rem; }
+  .area-list li { margin-bottom: 10px; list-style: none; color: var(--grey); }
+  .area-list li::before { content: "● "; color: var(--teal); }
+  .map-box {
+    aspect-ratio: 1/1;
+    border-radius: var(--radius);
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+  .map-box::before {
+    content: "PLACEHOLDER — service area map";
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 20px;
+    font-family: var(--font-mono); font-size: 0.75rem; color: rgba(242,239,233,0.4);
+  }
+  .map-pin {
+    position: absolute; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--amber); box-shadow: 0 0 0 6px rgba(232,84,44,0.25);
+  }
+
+  /* ---------- Why us ---------- */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .why-card { border-left: 3px solid var(--amber); padding-left: 20px; }
+  .why-stat { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--ink); line-height: 1; }
+  .why-card p { color: var(--grey); margin-top: 10px; font-size: 0.95rem; }
+
+  /* ---------- Footer / Contact ---------- */
+  footer { background: var(--ink); color: var(--paper); padding: 72px 0 32px; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(242,239,233,0.12);
+  }
+  .footer-grid h3 { font-size: 1.1rem; text-transform: none; margin-bottom: 16px; font-family: var(--font-body); font-weight: 700; }
+  .footer-grid p, .footer-grid a { color: #B9B5AC; font-size: 0.92rem; text-decoration: none; display: block; margin-bottom: 10px; }
+  .footer-grid a:hover { color: var(--amber); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px; font-family: var(--font-mono); font-size: 0.78rem; color: #8a8678;
+    flex-wrap: wrap; gap: 10px;
+  }
+
+  /* ---------- Sticky WhatsApp ---------- */
+  .float-wa {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 60;
+    background: var(--teal);
+    color: var(--white);
+    width: 58px; height: 58px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.3);
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  .float-wa:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 8px 22px rgba(0,0,0,0.3), 0 0 0 0 rgba(46,125,107,0.5); }
+    50% { box-shadow: 0 8px 22px rgba(0,0,0,0.3), 0 0 0 10px rgba(46,125,107,0); }
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 880px) {
+    nav.links, .nav-cta .btn-ghost { display: none; }
+    .mobile-toggle { display: block; }
+    .hero-grid, .pricing-wrap, .coverage-grid { grid-template-columns: 1fr; }
+    .services-grid, .why-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .ticket { position: static; margin-top: 20px; width: 100%; }
+    .area-list { columns: 1; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header>
+  <div class="wrap nav-row">
+    <a href="#top" class="logo">PR Tech <span>&amp;</span> Electronics</a>
+    <nav class="links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#contact" class="btn btn-ghost">Call</a>
+      <a href="https://wa.me/27000000000" class="btn btn-primary" target="_blank" rel="noopener">WhatsApp Us</a>
+    </div>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">TV &amp; Laptop Repairs · Johannesburg</span>
+      <h1>Your screen's black.<br><em>We're not.</em></h1>
+      <p class="hero-sub">PR Tech &amp; Electronics fixes TVs and laptops at your door or in our workshop, with honest pricing and no runaround — anywhere in Johannesburg.</p>
+      <div class="hero-ctas">
+        <a href="https://wa.me/27000000000" class="btn btn-primary" target="_blank" rel="noopener">Message us on WhatsApp</a>
+        <a href="#pricing" class="btn btn-ghost">See pricing</a>
+      </div>
+      <div class="hero-trust">
+        <span><strong>From R200</strong> diagnostic</span>
+        <span><strong>All of Joburg</strong> covered</span>
+        <span><strong>Fast</strong> turnaround</span>
+      </div>
+    </div>
+
+    <div class="hero-media reveal">
+      <div class="hero-img" role="img" aria-label="Placeholder photo of a technician repairing a television on a workbench"></div>
+      <div class="ticket">
+        <div class="ticket-row"><span>ISSUE</span><b>No power / black screen</b></div>
+        <div class="ticket-row"><span>EST. TURNAROUND</span><b>24–48 hrs</b></div>
+        <div class="ticket-price">R200<small>+ from</small></div>
+        <div class="ticket-row" style="margin:0;"><span>STATUS</span><b style="color:#2E7D6B;">QUOTE READY</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SERVICES ========== -->
+<section id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What we fix</span>
+      <h2>Two specialities. Done properly.</h2>
+      <p>We don't try to fix everything under the sun — just TVs and laptops, which means we're genuinely good at both.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-num">SERVICE / 01</span>
+        <h3>TV Repairs</h3>
+        <p>All brands, all panel types — LED, LCD, smart TVs. No power, no picture, cracked screens, software faults, port and board issues.</p>
+        <div class="tag-row">
+          <span class="tag">No power</span>
+          <span class="tag">Cracked screen</span>
+          <span class="tag">Smart TV faults</span>
+          <span class="tag">Sound issues</span>
+        </div>
+      </div>
+
+      <div class="service-card reveal">
+        <span class="service-num">SERVICE / 02</span>
+        <h3>Laptop Repairs</h3>
+        <p>Diagnosed before we quote, since every laptop fault is different. Screens, batteries, charging ports, slow performance, won't boot.</p>
+        <div class="tag-row">
+          <span class="tag">Won't boot</span>
+          <span class="tag">Battery / charging</span>
+          <span class="tag">Screen replacement</span>
+          <span class="tag">Running slow</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="dark">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">The process</span>
+      <h2>Three steps. No surprises.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-index">01</div>
+        <h3>Message us</h3>
+        <p class="grey">Send a WhatsApp with the problem and your area — we'll reply with next steps and a rough estimate.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-index">02</div>
+        <h3>Drop off or we collect</h3>
+        <p class="grey">Bring it to us or we'll arrange collection anywhere in Johannesburg, whichever's easier for you.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-index">03</div>
+        <h3>Get it back, fixed</h3>
+        <p class="grey">We diagnose, confirm the price before any work starts, repair it, and get it back to you fast.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PRICING & ESTIMATES ========== -->
+<section class="dark" id="pricing">
+  <div class="wrap pricing-wrap">
+    <div class="pricing-copy reveal">
+      <span class="eyebrow">Pricing &amp; estimates</span>
+      <h2>Real repairs don't come with fixed prices — but the first step always does.</h2>
+      <p class="grey">Every TV and laptop fault is different, so we diagnose before quoting. What we promise: a flat diagnostic fee, an upfront price before any work starts, and nothing added without your okay.</p>
+      <a href="https://wa.me/27000000000" class="btn btn-primary" target="_blank" rel="noopener">Get my estimate</a>
+    </div>
+
+    <div class="big-ticket reveal">
+      <div class="big-ticket-head">
+        <div><b>PR Tech &amp; Electronics</b>Job Estimate</div>
+        <div>No. 0001</div>
+      </div>
+      <div class="big-ticket-price">R200<span> starting diagnostic</span></div>
+      <ul class="ticket-list">
+        <li>Final price depends on the fault, parts, and labour</li>
+        <li>You approve the quote before any repair begins</li>
+        <li>No hidden callout or collection fees in Johannesburg</li>
+        <li>Most repairs completed within 24–48 hours</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COVERAGE ========== -->
+<section id="coverage">
+  <div class="wrap coverage-grid">
+    <div class="reveal">
+      <span class="eyebrow">Service area</span>
+      <h2 style="font-size:clamp(2rem,3.4vw,2.8rem); margin:10px 0 18px;">All of Johannesburg, covered.</h2>
+      <p style="color:var(--grey); margin-bottom:24px; max-width:48ch;">Wherever you are in Joburg, we can collect, repair, and return — or point you to our workshop if that's easier.</p>
+      <ul class="area-list">
+        <li>Sandton</li>
+        <li>Randburg</li>
+        <li>Roodepoort</li>
+        <li>Soweto</li>
+        <li>Midrand</li>
+        <li>Alexandra</li>
+        <li>Johannesburg CBD</li>
+        <li>Bedfordview</li>
+        <li>Fourways</li>
+        <li>Kempton Park</li>
+      </ul>
+    </div>
+    <div class="map-box reveal" role="img" aria-label="Placeholder map highlighting Johannesburg service area">
+      <span class="map-pin" style="top:38%; left:42%;"></span>
+      <span class="map-pin" style="top:55%; left:60%;"></span>
+      <span class="map-pin" style="top:30%; left:65%;"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WHY US ========== -->
+<section>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why PR Tech</span>
+      <h2>Straightforward, local, accountable.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-stat">100%</div>
+        <p>Quotes confirmed before any repair starts — never a surprise bill.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-stat">24–48h</div>
+        <p>Typical turnaround on most TV and laptop repairs.</p>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-stat">Joburg</div>
+        <p>Based locally and available across the whole metro, not just one suburb.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER / CONTACT ========== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>PR Tech &amp; Electronics</h3>
+        <p>TV and laptop repairs across Johannesburg. Message us for an honest, upfront quote.</p>
+        <a href="https://wa.me/27000000000" target="_blank" rel="noopener">WhatsApp: +27 00 000 0000</a>
+        <a href="tel:+27000000000">Call: +27 00 000 0000</a>
+      </div>
+      <div>
+        <h3>Hours</h3>
+        <p>Mon – Fri: 08:00 – 18:00</p>
+        <p>Saturday: 09:00 – 14:00</p>
+        <p>Sunday: Closed</p>
+      </div>
+      <div>
+        <h3>Quick links</h3>
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing &amp; estimates</a>
+        <a href="#coverage">Coverage area</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 PR Tech &amp; Electronics. All rights reserved.</span>
+      <span>Johannesburg, South Africa</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/27000000000" class="float-wa" target="_blank" rel="noopener" aria-label="Message us on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.27-1.38a9.9 9.9 0 0 0 4.77 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.79 14.06c-.24.68-1.19 1.25-1.95 1.41-.52.11-1.2.2-3.49-.75-2.93-1.21-4.82-4.18-4.97-4.37-.14-.2-1.19-1.58-1.19-3.02 0-1.43.75-2.13 1.02-2.42.27-.29.59-.36.78-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.83 2.02.9 2.17.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.29.76 1.25 1.63 2.02 1.12.99 2.06 1.3 2.35 1.45.29.15.46.12.63-.07.17-.2.73-.85.93-1.14.2-.29.39-.24.66-.14.27.1 1.7.8 1.99.94.29.15.49.22.56.34.07.12.07.7-.17 1.38z"/></svg>
+</a>
+
+<script>
+  // Scroll-reveal: fade-up sections as they enter the viewport
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
